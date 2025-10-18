@@ -8,7 +8,11 @@ import { CartItem } from '../types/product';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-// Stripe Elements用の決済フォームコンポーネント
+/**
+ * Stripe Elements用の決済フォームコンポーネント
+ * @param orderId 注文ID
+ * @param onSuccess 決済成功時のコールバック関数
+ */
 function PaymentForm({ orderId, onSuccess }: { 
   orderId: string; 
   onSuccess: () => void; 

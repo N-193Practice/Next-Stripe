@@ -2,24 +2,37 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { CartItem } from '../types/product';
 
+/**
+ * カートページコンポーネント
+ * ローカルストレージからカートデータを取得し、商品の表示・編集・削除機能を提供
+ */
 export default function Cart() {
+  // カートアイテムとローディング状態の管理
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // コンポーネントマウント時にローカルストレージからカートデータを取得
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     setCartItems(cart);
     setLoading(false);
   }, []);
 
+  /**
+   * 商品の数量を更新する関数
+   * @param productId 商品ID
+   * @param newQuantity 新しい数量
+   */
   const updateQuantity = (productId: string, newQuantity: number) => {
     if (newQuantity <= 0) {
       removeItem(productId);
       return;
     }
 
+    // カートアイテムの数量を更新
     const updatedCart = cartItems.map(item =>
       item.productId === productId ? { ...item, quantity: newQuantity } : item
     );
@@ -28,19 +41,28 @@ export default function Cart() {
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
+  /**
+   * カートから商品を削除する関数
+   * @param productId 削除する商品のID
+   */
   const removeItem = (productId: string) => {
     const updatedCart = cartItems.filter(item => item.productId !== productId);
     setCartItems(updatedCart);
     localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
+  /**
+   * カートを空にする関数
+   */
   const clearCart = () => {
     setCartItems([]);
     localStorage.removeItem('cart');
   };
 
+  // カート内の商品の合計金額を計算
   const totalAmount = cartItems.reduce((total, item) => total + (item.product.price * item.quantity), 0);
 
+  // ローディング状態の表示
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -94,9 +116,11 @@ export default function Cart() {
                   <div className="space-y-4">
                     {cartItems.map((item) => (
                       <div key={item.productId} className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg">
-                        <img
+                        <Image
                           src={item.product.imageUrl || '/placeholder-image.jpg'}
                           alt={item.product.title}
+                          width={80}
+                          height={80}
                           className="w-20 h-20 object-cover rounded-md"
                         />
                         <div className="flex-1">

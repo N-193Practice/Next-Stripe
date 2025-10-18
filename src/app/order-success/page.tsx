@@ -20,7 +20,7 @@ export default function OrderSuccess() {
       const orderHistory = JSON.parse(localStorage.getItem('orderHistory') || '[]');
       // カートから注文データを取得
       const cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
-      const totalAmount = cartItems.reduce((total: number, item: any) => total + (item.product.price * item.quantity), 0);
+      const totalAmount = cartItems.reduce((total: number, item: { product: { price: number }; quantity: number }) => total + (item.product.price * item.quantity), 0);
       
       orderHistory.push({
         id,

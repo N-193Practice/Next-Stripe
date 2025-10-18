@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Order } from '../types/product';
-import { orderService } from '../lib/firestore';
 
 export default function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -112,9 +112,11 @@ export default function Orders() {
                   <div className="space-y-2">
                     {order.items && order.items.length > 0 ? order.items.map((item, index) => (
                       <div key={index} className="flex items-center space-x-3">
-                        <img
+                        <Image
                           src={item.product.imageUrl || '/placeholder-image.jpg'}
                           alt={item.product.title}
+                          width={48}
+                          height={48}
                           className="w-12 h-12 object-cover rounded-md"
                         />
                         <div className="flex-1">

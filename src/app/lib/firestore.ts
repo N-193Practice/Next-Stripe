@@ -8,15 +8,22 @@ import {
   deleteDoc, 
   query, 
   orderBy,
-  where,
   serverTimestamp 
 } from 'firebase/firestore';
 import { db } from './firebase/client';
 import { Product, Order } from '../types/product';
 
+/**
+ * Firestoreデータベース操作のためのサービス
+ * 商品データと注文データのCRUD操作を提供
+ */
+
 // 商品関連の関数
 export const productService = {
-  // 全商品を取得
+  /**
+   * 全商品を取得する関数
+   * @returns 商品の配列
+   */
   async getAllProducts(): Promise<Product[]> {
     const productsRef = collection(db, 'products');
     const q = query(productsRef, orderBy('createdAt', 'desc'));
@@ -30,7 +37,11 @@ export const productService = {
     })) as Product[];
   },
 
-  // 商品をIDで取得
+  /**
+   * IDで商品を取得する関数
+   * @param id 商品ID
+   * @returns 商品データまたはnull
+   */
   async getProductById(id: string): Promise<Product | null> {
     const productRef = doc(db, 'products', id);
     const productSnap = await getDoc(productRef);
@@ -47,7 +58,11 @@ export const productService = {
     } as Product;
   },
 
-  // 商品を追加
+  /**
+   * 商品を追加する関数
+   * @param product 商品データ（ID、作成日時、更新日時を除く）
+   * @returns 作成された商品のID
+   */
   async addProduct(product: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
     const productsRef = collection(db, 'products');
     const docRef = await addDoc(productsRef, {
@@ -76,7 +91,11 @@ export const productService = {
 
 // 注文関連の関数
 export const orderService = {
-  // 注文を作成
+  /**
+   * 注文を作成する関数
+   * @param order 注文データ（ID、作成日時、更新日時を除く）
+   * @returns 作成された注文のID
+   */
   async createOrder(order: Omit<Order, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> {
     const ordersRef = collection(db, 'orders');
     const docRef = await addDoc(ordersRef, {
