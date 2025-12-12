@@ -48,7 +48,7 @@ export default function Home() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <h1 className="text-3xl font-bold text-gray-900">ECサイト</h1>
+            <h1 className="text-3xl font-bold text-black">ECサイト</h1>
             <div className="flex space-x-4">
               {/* カートページへのリンク */}
               <Link href="/cart" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
@@ -61,7 +61,7 @@ export default function Home() {
 
       {/* メインコンテンツ部分 */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h2 className="text-2xl font-bold text-gray-900 mb-8">商品一覧</h2>
+        <h2 className="text-2xl font-bold text-black mb-8">商品一覧</h2>
         
         {/* 商品がない場合の表示 */}
         {products.length === 0 ? (
@@ -84,10 +84,10 @@ export default function Home() {
                 </div>
                 {/* 商品情報 */}
                 <div className="p-4">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.title}</h3>
-                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">{product.description}</p>
+                  <h3 className="text-lg font-semibold text-black mb-2">{product.title}</h3>
+                  <p className="text-black text-sm mb-3 line-clamp-2">{product.description}</p>
                   <div className="flex justify-between items-center">
-                    <span className="text-xl font-bold text-gray-900">¥{product.price.toLocaleString()}</span>
+                    <span className="text-xl font-bold text-black">¥{product.price.toLocaleString()}</span>
                     {/* 商品詳細ページへのリンク */}
                     <Link
                       href={`/products/${product.id}`}

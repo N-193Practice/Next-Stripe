@@ -140,24 +140,24 @@ export default function ProductDetail() {
               />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-4">{product.title}</h1>
-              <p className="text-gray-600 mb-6">{product.description}</p>
+              <h1 className="text-3xl font-bold text-black mb-4">{product.title}</h1>
+              <p className="text-black mb-6">{product.description}</p>
               
               <div className="mb-6">
-                <span className="text-3xl font-bold text-gray-900">¥{product.price.toLocaleString()}</span>
+                <span className="text-3xl font-bold text-black">¥{product.price.toLocaleString()}</span>
               </div>
 
               <div className="mb-6">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   数量
                 </label>
                 <select
                   value={quantity}
                   onChange={(e) => setQuantity(parseInt(e.target.value))}
-                  className="border border-gray-300 rounded-md px-3 py-2 w-20"
+                  className="border border-gray-300 rounded-md px-3 py-2 w-20 text-black"
                 >
                   {Array.from({ length: Math.min(10, product.stock) }, (_, i) => i + 1).map((num) => (
-                    <option key={num} value={num}>
+                    <option key={num} value={num} className="text-black">
                       {num}
                     </option>
                   ))}
@@ -179,7 +179,7 @@ export default function ProductDetail() {
                 </Link>
               </div>
 
-              <div className="mt-6 text-sm text-gray-500">
+              <div className="mt-6 text-sm text-black">
                 <p>在庫数: {product.stock}個</p>
                 <p>カテゴリ: {product.category}</p>
               </div>

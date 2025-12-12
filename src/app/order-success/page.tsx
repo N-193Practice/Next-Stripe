@@ -39,7 +39,7 @@ export default function OrderSuccess() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <Link href="/" className="text-3xl font-bold text-gray-900">
+            <Link href="/" className="text-3xl font-bold text-black">
               ECサイト
             </Link>
           </div>
@@ -66,18 +66,18 @@ export default function OrderSuccess() {
             </div>
           </div>
 
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <h1 className="text-3xl font-bold text-black mb-4">
             ご注文ありがとうございます！
           </h1>
           
-          <p className="text-gray-600 mb-6">
+          <p className="text-black mb-6">
             お支払いが正常に完了しました。注文確認メールをお送りいたします。
           </p>
 
           {orderId && (
             <div className="bg-gray-50 rounded-lg p-4 mb-6">
-              <p className="text-sm text-gray-600">注文番号</p>
-              <p className="font-mono text-lg font-semibold text-gray-900">{orderId}</p>
+              <p className="text-sm text-black">注文番号</p>
+              <p className="font-mono text-lg font-semibold text-black">{orderId}</p>
             </div>
           )}
 
