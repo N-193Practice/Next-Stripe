@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Order } from '../types/product';
-import { orderService } from '../lib/firestore';
 
 export default function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -62,7 +62,7 @@ export default function Orders() {
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <Link href="/" className="text-3xl font-bold text-gray-900">
+            <Link href="/" className="text-3xl font-bold text-black">
               ECサイト
             </Link>
             <div className="flex space-x-4">
@@ -75,7 +75,7 @@ export default function Orders() {
       </header>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">注文履歴</h1>
+        <h1 className="text-3xl font-bold text-black mb-8">注文履歴</h1>
         
         {orders.length === 0 ? (
           <div className="text-center py-12">
@@ -90,10 +90,10 @@ export default function Orders() {
               <div key={order.id} className="bg-white rounded-lg shadow-md p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">
+                    <h3 className="text-lg font-semibold text-black">
                       注文番号: {order.id}
                     </h3>
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-black">
                       注文日: {new Date(order.createdAt).toLocaleDateString('ja-JP')}
                     </p>
                   </div>
@@ -101,32 +101,34 @@ export default function Orders() {
                     <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.status)}`}>
                       {getStatusText(order.status)}
                     </span>
-                    <p className="text-lg font-bold text-gray-900 mt-1">
+                    <p className="text-lg font-bold text-black mt-1">
                       ¥{order.totalAmount.toLocaleString()}
                     </p>
                   </div>
                 </div>
 
                 <div className="border-t pt-4">
-                  <h4 className="font-medium text-gray-900 mb-2">注文商品</h4>
+                  <h4 className="font-medium text-black mb-2">注文商品</h4>
                   <div className="space-y-2">
                     {order.items && order.items.length > 0 ? order.items.map((item, index) => (
                       <div key={index} className="flex items-center space-x-3">
-                        <img
+                        <Image
                           src={item.product.imageUrl || '/placeholder-image.jpg'}
                           alt={item.product.title}
+                          width={48}
+                          height={48}
                           className="w-12 h-12 object-cover rounded-md"
                         />
                         <div className="flex-1">
-                          <p className="font-medium text-gray-900">{item.product.title}</p>
-                          <p className="text-sm text-gray-500">数量: {item.quantity}</p>
+                          <p className="font-medium text-black">{item.product.title}</p>
+                          <p className="text-sm text-black">数量: {item.quantity}</p>
                         </div>
-                        <p className="text-gray-900">
+                        <p className="text-black">
                           ¥{(item.product.price * item.quantity).toLocaleString()}
                         </p>
                       </div>
                     )) : (
-                      <p className="text-gray-500">注文商品の情報がありません</p>
+                      <p className="text-black">注文商品の情報がありません</p>
                     )}
                   </div>
                 </div>

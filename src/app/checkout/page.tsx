@@ -8,7 +8,11 @@ import { CartItem } from '../types/product';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-// Stripe Elements用の決済フォームコンポーネント
+/**
+ * Stripe Elements用の決済フォームコンポーネント
+ * @param orderId 注文ID
+ * @param onSuccess 決済成功時のコールバック関数
+ */
 function PaymentForm({ orderId, onSuccess }: { 
   orderId: string; 
   onSuccess: () => void; 
@@ -60,7 +64,7 @@ function PaymentForm({ orderId, onSuccess }: {
   return (
     <div className="space-y-4">
       <div className="border border-gray-300 rounded-md p-4">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label className="block text-sm font-medium text-black mb-2">
           支払い情報
         </label>
         <PaymentElement
@@ -195,11 +199,11 @@ export default function Checkout() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div>
             <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-6">お客様情報</h2>
+              <h2 className="text-xl font-semibold text-black mb-6">お客様情報</h2>
               
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-black mb-2">
                     お名前 *
                   </label>
                   <input
@@ -213,7 +217,7 @@ export default function Checkout() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-black mb-2">
                     メールアドレス *
                   </label>
                   <input
@@ -227,7 +231,7 @@ export default function Checkout() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-black mb-2">
                     住所 *
                   </label>
                   <input
@@ -242,7 +246,7 @@ export default function Checkout() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-black mb-2">
                       市区町村 *
                     </label>
                     <input
@@ -255,7 +259,7 @@ export default function Checkout() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-black mb-2">
                       郵便番号 *
                     </label>
                     <input
@@ -304,7 +308,7 @@ export default function Checkout() {
 
           <div>
             <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-4">注文内容</h2>
+              <h2 className="text-xl font-semibold text-black mb-4">注文内容</h2>
               
               <div className="space-y-4">
                 {cartItems.map((item) => (
@@ -317,11 +321,11 @@ export default function Checkout() {
                       className="w-16 h-16 object-cover rounded-md"
                     />
                     <div className="flex-1">
-                      <h3 className="font-medium text-gray-900">{item.product.title}</h3>
-                      <p className="text-gray-600 text-sm">数量: {item.quantity}</p>
+                      <h3 className="font-medium text-black">{item.product.title}</h3>
+                      <p className="text-black text-sm">数量: {item.quantity}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-medium text-gray-900">
+                      <p className="font-medium text-black">
                         ¥{(item.product.price * item.quantity).toLocaleString()}
                       </p>
                     </div>
@@ -330,7 +334,7 @@ export default function Checkout() {
               </div>
 
               <div className="border-t pt-4 mt-4">
-                <div className="flex justify-between items-center text-lg font-semibold">
+                <div className="flex justify-between items-center text-lg font-semibold text-black">
                   <span>合計:</span>
                   <span>¥{totalAmount.toLocaleString()}</span>
                 </div>
