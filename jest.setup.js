@@ -20,5 +20,10 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 })
 
+// fetchのモック（Stripeなどで使用）
+if (typeof global.fetch === 'undefined') {
+  global.fetch = jest.fn()
+}
+
 
 
