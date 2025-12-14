@@ -2,14 +2,8 @@
 // @testing-library/jest-domのマッチャーをインポート
 import '@testing-library/jest-dom'
 
-// localStorageのモック
-const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
-}
-global.localStorage = localStorageMock
+
+// テストでは実際のlocalStorageを使用する
 
 // window.matchMediaのモック（Tailwind CSSなどで使用）
 Object.defineProperty(window, 'matchMedia', {
@@ -25,4 +19,6 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: jest.fn(),
   })),
 })
+
+
 

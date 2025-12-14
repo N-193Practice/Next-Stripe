@@ -15,6 +15,7 @@ export default function Home() {
   // 商品データの状態管理
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   // コンポーネントマウント時に商品データを取得
   useEffect(() => {
@@ -23,8 +24,10 @@ export default function Home() {
         // Firestoreから全商品データを取得
         const data = await productService.getAllProducts();
         setProducts(data);
+        setError(null);
       } catch (error) {
         console.error('商品の取得に失敗しました:', error);
+        setError('商品の取得に失敗しました。しばらくしてから再度お試しください。');
       } finally {
         setLoading(false);
       }
@@ -63,12 +66,19 @@ export default function Home() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h2 className="text-2xl font-bold text-black mb-8">商品一覧</h2>
         
+        {/* エラーメッセージの表示 */}
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+            <p className="text-black">{error}</p>
+          </div>
+        )}
+        
         {/* 商品がない場合の表示 */}
-        {products.length === 0 ? (
+        {!error && products.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-gray-500">商品がありません</p>
           </div>
-        ) : (
+        ) : !error ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {products.map((product) => (
               <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
@@ -100,7 +110,7 @@ export default function Home() {
               </div>
             ))}
           </div>
-        )}
+        ) : null}
       </main>
     </div>
   );
